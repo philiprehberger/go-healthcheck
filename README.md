@@ -1,5 +1,9 @@
 # go-healthcheck
 
+[![CI](https://github.com/philiprehberger/go-healthcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/go-healthcheck/actions/workflows/ci.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/philiprehberger/go-healthcheck.svg)](https://pkg.go.dev/github.com/philiprehberger/go-healthcheck)
+[![License](https://img.shields.io/github/license/philiprehberger/go-healthcheck)](LICENSE)
+
 Health and readiness endpoint builder for Go HTTP services. Built for Kubernetes.
 
 ## Installation
