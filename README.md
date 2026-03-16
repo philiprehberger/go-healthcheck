@@ -94,6 +94,13 @@ Returns HTTP 200 when all checks pass, HTTP 503 when any check fails.
 | `WithTimeout(d)` | Option: per-check timeout |
 | `WithCacheTTL(d)` | Option: result caching duration |
 
+## Development
+
+```bash
+go test ./...
+go vet ./...
+```
+
 ## License
 
 MIT
