@@ -35,6 +35,24 @@ func main() {
 }
 ```
 
+### Memory Check
+
+```go
+import healthcheck "github.com/philiprehberger/go-healthcheck"
+
+h := healthcheck.New()
+h.AddReadinessCheck("memory", healthcheck.MemoryUsage(512 * 1024 * 1024)) // 512 MB
+```
+
+### HTTP Endpoint Check
+
+```go
+import healthcheck "github.com/philiprehberger/go-healthcheck"
+
+h := healthcheck.New()
+h.AddReadinessCheck("api", healthcheck.HTTPEndpoint("https://api.example.com/health"))
+```
+
 ## Built-in Checks
 
 | Check | Description |
@@ -43,6 +61,8 @@ func main() {
 | `TCPDial(addr)` | Dials a TCP address (host:port) |
 | `GoroutineCount(max)` | Fails if goroutine count exceeds max |
 | `DNSResolve(host)` | Resolves a hostname via DNS |
+| `HTTPEndpoint(url)` | Verifies an HTTP endpoint responds with 2xx |
+| `MemoryUsage(maxBytes)` | Fails if memory usage exceeds threshold |
 
 ## Check Options
 
@@ -91,6 +111,8 @@ Returns HTTP 200 when all checks pass, HTTP 503 when any check fails.
 | `TCPDial(addr)` | Check that dials a TCP address |
 | `GoroutineCount(max)` | Check that limits goroutine count |
 | `DNSResolve(host)` | Check that resolves a hostname |
+| `HTTPEndpoint(url)` | Check that verifies an HTTP endpoint responds 2xx |
+| `MemoryUsage(maxBytes)` | Check that limits memory usage |
 | `WithTimeout(d)` | Option: per-check timeout |
 | `WithCacheTTL(d)` | Option: result caching duration |
 

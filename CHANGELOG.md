@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Add `MemoryUsage` check for memory threshold monitoring
+- Add `HTTPEndpoint` check for HTTP health probing
+- Expand README with new check examples
+
 ## 0.1.2
 
 - Add Development section to README

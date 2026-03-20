@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net"
+	"net/http"
 	"runtime"
 	"time"
 )
@@ -56,6 +57,37 @@ func DNSResolve(host string) CheckFunc {
 		_, err := resolver.LookupHost(ctx, host)
 		if err != nil {
 			return fmt.Errorf("dns resolve %s: %w", host, err)
+		}
+		return nil
+	}
+}
+
+// HTTPEndpoint returns a check that verifies an HTTP endpoint responds with a 2xx status.
+func HTTPEndpoint(url string) CheckFunc {
+	return func(ctx context.Context) error {
+		req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+		if err != nil {
+			return fmt.Errorf("create request: %w", err)
+		}
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			return fmt.Errorf("http request: %w", err)
+		}
+		defer resp.Body.Close()
+		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			return fmt.Errorf("unexpected status: %d", resp.StatusCode)
+		}
+		return nil
+	}
+}
+
+// MemoryUsage returns a check that verifies memory usage is below the given threshold in bytes.
+func MemoryUsage(maxBytes uint64) CheckFunc {
+	return func(_ context.Context) error {
+		var m runtime.MemStats
+		runtime.ReadMemStats(&m)
+		if m.Alloc > maxBytes {
+			return fmt.Errorf("memory usage %d bytes exceeds threshold %d bytes", m.Alloc, maxBytes)
 		}
 		return nil
 	}

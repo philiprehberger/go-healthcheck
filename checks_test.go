@@ -39,3 +39,15 @@ func TestTCPDial(t *testing.T) {
 		t.Fatal("expected error dialing unreachable port")
 	}
 }
+
+func TestMemoryUsage(t *testing.T) {
+	check := MemoryUsage(1 << 30) // 1 GB — should pass
+	if err := check(context.Background()); err != nil {
+		t.Errorf("expected memory check to pass: %v", err)
+	}
+
+	check = MemoryUsage(1) // 1 byte — should fail
+	if err := check(context.Background()); err == nil {
+		t.Error("expected memory check to fail")
+	}
+}
