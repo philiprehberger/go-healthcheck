@@ -1,8 +1,6 @@
 # go-healthcheck
 
-[![CI](https://github.com/philiprehberger/go-healthcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/go-healthcheck/actions/workflows/ci.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/philiprehberger/go-healthcheck.svg)](https://pkg.go.dev/github.com/philiprehberger/go-healthcheck)
-[![License](https://img.shields.io/github/license/philiprehberger/go-healthcheck)](LICENSE)
+[![CI](https://github.com/philiprehberger/go-healthcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/go-healthcheck/actions/workflows/ci.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/philiprehberger/go-healthcheck.svg)](https://pkg.go.dev/github.com/philiprehberger/go-healthcheck) [![License](https://img.shields.io/github/license/philiprehberger/go-healthcheck)](LICENSE)
 
 Health and readiness endpoint builder for Go HTTP services. Built for Kubernetes
 
@@ -53,7 +51,7 @@ h := healthcheck.New()
 h.AddReadinessCheck("api", healthcheck.HTTPEndpoint("https://api.example.com/health"))
 ```
 
-## Built-in Checks
+### Built-in Checks
 
 | Check | Description |
 |-------|-------------|
@@ -64,7 +62,7 @@ h.AddReadinessCheck("api", healthcheck.HTTPEndpoint("https://api.example.com/hea
 | `HTTPEndpoint(url)` | Verifies an HTTP endpoint responds with 2xx |
 | `MemoryUsage(maxBytes)` | Fails if memory usage exceeds threshold |
 
-## Check Options
+### Check Options
 
 ```go
 h.AddLivenessCheck("db", hc.DatabasePing(db),
@@ -78,7 +76,7 @@ h.AddLivenessCheck("db", hc.DatabasePing(db),
 | `WithTimeout(d)` | Maximum duration for the check |
 | `WithCacheTTL(d)` | Cache the result for the given duration |
 
-## Response Format
+### Response Format
 
 ```json
 {

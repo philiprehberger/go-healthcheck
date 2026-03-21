@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Consolidate README badges onto single line, restructure README sections, fix CHANGELOG format
+
 ## 0.2.0
 
 - Add `MemoryUsage` check for memory threshold monitoring
@@ -10,7 +14,7 @@
 
 - Add Development section to README
 
-## 0.1.0 (2026-03-15)
+## 0.1.0
 
 - Initial release
 - Liveness and readiness health checks
